@@ -6,15 +6,12 @@
 	<title>Log inn bekreftelse</title>
 </head>
 <body>
-	<img style="margin:0 auto;display:block;" src="https://www.haslien.no/wp-content/uploads/pp/images/1514552335-web-logo-spaced.png" alt="Haslien Fotografene logo">
-	<a href="https://haslien.no"></a>
-	<form method="POST" style="
-    max-width: 30em;
-    margin: 0 auto;
-    text-align: center;
-">
+	<a href="https://haslien.no">
+		<img style="margin:0 auto;display:block;" src="https://www.haslien.no/wp-content/uploads/pp/images/1514552335-web-logo-spaced.png" alt="Haslien Fotografene logo">
+	</a>
+	<form method="POST" style="max-width: 30em;margin: 0 auto;text-align: center;">
 		<h1>Log inn</h1>
-		<p>Du må oppgive tildelt brukernavn og passord for å komme videre.</p>
+		<p>Du må oppgi tildelt brukernavn og passord for å komme videre.</p>
 		<input type="text" name="username" id="username" required aria-required="true" placeholder="Brukernavn" autocomplete="username"><br/>
 		<input type="password" name="password" id="password" required aria-required="true" placeholder="Passord" autocomplete="current-password"><br/>
 		<input type="hidden" name="token" value="<%= token %>" aria-hidden="true">
