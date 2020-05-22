@@ -23,12 +23,17 @@
   },
   "homepage": "https://github.com/KeyboardRage/haslien-short-2#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
+    "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "got": "^10.7.0",
     "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "mongoose-int32": "^0.3.1",
     "passport": "^0.4.1",
-    "passport-http-bearer": "^1.0.1"
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0"
   }
 }

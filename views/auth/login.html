@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Log inn bekreftelse</title>
+</head>
+<body>
+	<img style="margin:0 auto;display:block;" src="https://www.haslien.no/wp-content/uploads/pp/images/1514552335-web-logo-spaced.png" alt="Haslien Fotografene logo">
+	<a href="https://haslien.no"></a>
+	<form method="POST" style="
+    max-width: 30em;
+    margin: 0 auto;
+    text-align: center;
+">
+		<h1>Log inn</h1>
+		<p>Du må oppgive tildelt brukernavn og passord for å komme videre.</p>
+		<input type="text" name="username" id="username" required aria-required="true" placeholder="Brukernavn" autocomplete="username"><br/>
+		<input type="password" name="password" id="password" required aria-required="true" placeholder="Passord" autocomplete="current-password"><br/>
+		<input type="hidden" name="token" value="<%= token %>" aria-hidden="true">
+		<div style="display:flex; justify-content: space-evenly;width:15em;margin:1em auto;">
+			<input type="submit" value="Log inn" id="s">
+			<input type="reset" value="&times; T&oslash;m">
+		</div>
+		<strong id="a" style="display: none;color:red"></strong>
+	</form>
+</body>
+<style>
+	body {
+		font-family: Arial, Helvetica, sans-serif;
+		background: #f6f6f6;
+		color: #252525;
+	}
+	input[type="text"],input[type="password"] {
+		width:100%;
+		padding:.4em .6em;
+		margin:.4em 0;
+		width: 15em;
+	}
+
+	input[type="submit"],
+	input[type="reset"] {
+		border: none;
+		padding:.6em 1.2em;
+	}
+
+	input[type="submit"] {
+		transition: all .2s ease;
+		cursor: pointer;
+		background: #ab7000;
+		color: #fff;
+	}input[type="submit"]:hover {
+		transition: all .2s ease;
+		cursor: pointer;
+		background: #946000;
+	}
+	input[type="reset"] {
+		transition: all .2s ease;
+		cursor: pointer;
+		background: #0000000c;
+	}input[type="reset"]:hover {
+		transition: all .2s ease;
+		cursor: pointer;
+		background: #00000013;
+	}
+</style>
+<script>
+	const s = document.getElementById("s");
+	const a = document.getElementById("a");
+	s.addEventListener("click", e => {
+		e.preventDefault();
+		auth();
+	});
+
+	async function auth() {
+		let r = await fetch("/.auth/login", {
+			method: "POST",
+			headers: {
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify({"token":"<%= token %>","username": document.getElementById("username").value, "password": document.getElementById("password").value})
+		});
+
+		if (r.status!==200) {
+			switch(r.status) {
+				case 401: {
+					a.textContent="Feil brukernavn/passord";
+					a.style.display="block";
+					break;
+				}
+				default: {
+					a.textContent="En ukjent feil oppstod.";
+					a.style.display="block";
+				}
+			}
+			return;
+		}
+
+		r = await r.json();
+		return window.location.href=r.redirect;
+	}
+</script>
+</html>

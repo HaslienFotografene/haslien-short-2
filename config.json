@@ -1,3 +1,13 @@
 {
-	"backupPort":4999
+	"backupPort":4999,
+	"defaultRedirect": "https://www.haslien.no",
+	"flags": {
+		"deprecated": 1,
+		"passphrase": 2,
+		"login": 4,
+		"frame": 8
+	},
+	"phrases": {
+		"invalid_passphrase": "Ugyldig nøkkelord."
+	}
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ugyldig token</title>
+</head>
+<body>
+	<h1>Din token er ikke gyldig.</h1>
+	<% if (link) { %>
+		<p>Du kan prøve å <a href="<%-link%>">gå til hovedlinken</a> igjen for å se om du får lastet den inn.</p>
+	<% } else { %>
+		<p>Token du brukte er ikke en gyldig en. Prøv den originale linken du fikk i stedet.</p>	
+	<% } %>
+<style>
+	body {
+		font-family: Arial, Helvetica, sans-serif;
+		background: #f6f6f6;
+		color: #252525;
+		text-align: center;
+	}
+</style>
+</body>
+</html>
