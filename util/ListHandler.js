@@ -75,6 +75,16 @@ module.exports = class ListHandler {
 	}
 
 	/**
+	 * Checks if a destination exist or not
+	 * @param {string} path The URL destination to check
+	 * @returns {Promise<boolean>}
+	 */
+	async destExist(path) {
+		let d = await this.urlModel.find({ dest: path.toLowerCase() }, ["_id"]).limit(1);
+		return !!d.length;
+	}
+
+	/**
 	 * Get the access logs of a specific path
 	 * @param {string} path The short URL path to get
 	 * @param {number} [limit=50] Max number of documents to return

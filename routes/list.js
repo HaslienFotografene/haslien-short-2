@@ -39,24 +39,13 @@ router.get("/logs", passport.authenticate(token, { session: false }), async (req
 	});
 });
 
-router.get("/:path", passport.authenticate(token, {session:false}), async (req,res) => {
+
+router.get("/exist", passport.authenticate(token, { session: false }), async (req, res) => {
 	const handler = new ListHandler();
+	if (!req.query.dest) return res.status(401).end();
 
-	let data = await handler.getPath(req.params.path);
-
-	if (!data) return res.status(404).json({
-		err_internal: false,
-		err_client: false,
-		message: null,
-		data: null
-	});
-
-	return res.json({
-		err_internal: false,
-		err_client: false,
-		message: null,
-		data: data.toObject()
-	});
+	if (!await handler.destExist(req.query.dest)) return res.status(404).end();
+	return res.status(200).end();
 });
 
 router.get("/exist/:path", passport.authenticate(token, { session: false }), async (req, res) => {
@@ -82,6 +71,26 @@ router.get("/logs/:path", passport.authenticate(token, { session: false }), asyn
 		err_internal: false,
 		message: null,
 		data: await handler.getLogs(req.params.path, req.query.limit, req.query.offset)
+	});
+});
+
+router.get("/:path", passport.authenticate(token, { session: false }), async (req, res) => {
+	const handler = new ListHandler();
+
+	let data = await handler.getPath(req.params.path);
+
+	if (!data) return res.status(404).json({
+		err_internal: false,
+		err_client: false,
+		message: null,
+		data: null
+	});
+
+	return res.json({
+		err_internal: false,
+		err_client: false,
+		message: null,
+		data: data.toObject()
 	});
 });
 
