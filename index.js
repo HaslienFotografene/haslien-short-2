@@ -9,6 +9,7 @@ require("./util/Database");
 global.mainFolder = path.resolve(__dirname);
 const { urlModel } = require("./util/Database");
 const crypto = require("crypto");
+const cors = require("cors");
 
 app.use(helmet());
 app.engine("html", require("ejs").renderFile);
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true, limit: "5mb" }));
 app.use(express.json({ limit: "5mb" }));
 // Random JWT for every restart
 process.env.JWT_TOKEN = crypto.randomBytes(30).toString("hex");
+app.use(cors());
 
 // Generic error catching
 app.use((err, req, res, next) => {
