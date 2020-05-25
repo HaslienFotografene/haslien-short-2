@@ -3,7 +3,7 @@ const Int32 = require("mongoose-int32");
 // Development: mongodb://10.0.0.73:27017/urlshort?replicaSet=rs0
 // Production: process.env.DB_STRING
 
-const db = mongoose.createConnection(process.env.DB_STRING, {
+const db = mongoose.createConnection(process.env.NODE_ENV ==="development" ? "mongodb://10.0.0.73:27017/urlshort?replicaSet=rs0" : process.env.DB_STRING, {
 	useFindAndModify: false,
 	useNewUrlParser: true,
 	useUnifiedTopology: true
@@ -60,6 +60,7 @@ const accessLogSchema = new mongoose.Schema({
 	origin: String,
 	ip: String,
 	notFound: Boolean,
+	user: String,
 	queryStrings: [Object],
 	shortId: {
 		ref: "urlModel",

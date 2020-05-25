@@ -219,6 +219,17 @@ class Statistics {
 	ipFromReq(req) {
 		return req.ip || req.ips[0] || req.headers['x-forwarded-for'] || null;
 	}
+
+	/**
+	 * Update an entry log to attach username to this access 
+	 * @param {string} docId The MongoDB document ID containing the event
+	 * @param {string} username The username that accessed it
+	 * @async
+	 */
+	async appendUser(docId, username) {
+		await this.logModel.updateOne({_id: docId}, {$set:{user: username}});
+		return;
+	}
 }
 
 module.exports = Statistics;

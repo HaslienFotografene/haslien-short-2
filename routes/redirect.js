@@ -18,25 +18,25 @@ router.get("/:url", async (req,res) => {
 	}
 
 	stats.inc();
-	stats.log(stats.ipFromReq(req), req.params.url, req.headers["user-agent"], req.header("Referer"), stats.toArray(req.query), !handler.exist);
+	let statDoc = await stats.log(stats.ipFromReq(req), req.params.url, req.headers["user-agent"], req.header("Referer"), stats.toArray(req.query), !handler.exist);
 
 	// Check if requiring higher level first:
 	// - require Username + Password:
 	if (handler.loginRequired) {
 		// Makes API call to Auth, which then handle redirects.
-		return res.render("auth/login", { token: handler.jwt("login") });
+		return res.render("auth/login", { token: handler.jwt("login", statDoc._id) });
 	}
 
 	// Check if requiring higher level first:
 	// - require password:
 	if (handler.passphraseRequired) {
 		// Makes API call to Auth, which then handle redirects.
-		return res.render("auth/password", { token: handler.jwt("password") });
+		return res.render("auth/password", { token: handler.jwt("password", statDoc._id) });
 	}
 
 	// If frame, go to frame endpoint instead
 	if (handler.frame) {
-		return res.render("frame", { token: handler.jwt("frame"), url: handler.doc.dest });
+		return res.render("frame", { token: handler.jwt("frame", statDoc._id), url: handler.doc.dest });
 	}
 
 	// Else normal redirect

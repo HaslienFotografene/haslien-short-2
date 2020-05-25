@@ -87,7 +87,7 @@ module.exports.login = login;
  * @param {Function} cb The callback function
  */
 const token = new TokenStrategy((token, cb) => {
-	if(token===process.env.API_TOKEN) return cb(null, true);
+	if (token===process.env.API_TOKEN) return cb(null, true);
 	return cb(null, false);
 });
 module.exports.token = token;

@@ -38,11 +38,12 @@ app.set("trust proxy", true);
 app.use("/.auth", require("./routes/auth"));
 app.use("/.new", require("./routes/new"));
 app.use("/.frame", require("./routes/frame"));
+app.use("/.list", require("./routes/list"));
 app.get("/:url", require("./routes/redirect"));
 
-// app.get("/", (req,res) =>{
-// 	return res.redirect(config.defaultRedirect);
-// });
+app.get("/", (req,res) =>{
+	return res.redirect(config.defaultRedirect);
+});
 
 // app.get("/:url", (req,res) => {
 // 	try {

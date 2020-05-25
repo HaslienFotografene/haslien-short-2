@@ -195,11 +195,13 @@ class RouteHandler {
 	/**
 	 * Creates a JWT for the current path
 	 * @param {String} type A string defining what type of login is expected
+	 * @param {string} accessId A document in the DB linked to accessing of this page
 	 * @returns {String}
 	 */
-	jwt(type) {
+	jwt(type, accessId=null) {
 		return this._jwt.sign({
 			path: this.route,
+			a: accessId,
 			type: type,
 			flags: this.doc.flags||0
 		},
