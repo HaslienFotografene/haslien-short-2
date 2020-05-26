@@ -26,8 +26,6 @@ const passphrase = new LocalStrategy({
 		// Token is invalid
 		if (!data) return cb(null, false);
 
-		if (typeof(data.path))
-
 		let doc = await urlModel.findOne({url: data.path.toLowerCase(), passphrase: passphrase.toString()}, ["dest"]);
 	
 		// No document
