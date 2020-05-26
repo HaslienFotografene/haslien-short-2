@@ -24,7 +24,7 @@ app.use(cors());
 
 // Generic error catching
 app.use((err, req, res, next) => {
-	if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+	if (err instanceof SyntaxError /*&& err.status === 400 && "body" in err*/) {
 		return res.status(400).json({
 			err_internal: false,
 			err_client: true,

@@ -18,15 +18,17 @@ const passphrase = new LocalStrategy({
 	passReqToCallback: true
 }, async (req, _, passphrase, cb) => {
 	try {
-		// Missing token
-		if (!req.body.token) return cb(null, false);
+		// Missing token or other
+		if (!req.body.token || typeof(req.body.token)!=="string" || typeof(passphrase)!=="string") return cb(null, false);
 
 		let data = RouteHandler.verifyToken(req.body.token);
 
 		// Token is invalid
 		if (!data) return cb(null, false);
 
-		let doc = await urlModel.findOne({url: data.path.toLowerCase(), passphrase: passphrase}, ["dest"]);
+		if (typeof(data.path))
+
+		let doc = await urlModel.findOne({url: data.path.toLowerCase(), passphrase: passphrase.toString()}, ["dest"]);
 	
 		// No document
 		if (!doc) return cb(null, false);
@@ -52,7 +54,7 @@ const login = new LocalStrategy({
 }, async (req, username, password, cb) => {
 	try {
 		// Missing token
-		if (!req.body.token) return cb(null, false);
+		if (!req.body.token || typeof(req.body.token)!=="string" || typeof(passphrase)!=="string"|| typeof(username)!=="string") return cb(null, false);
 		
 		let data = RouteHandler.verifyToken(req.body.token);
 		
@@ -61,7 +63,7 @@ const login = new LocalStrategy({
 		// Token is invalid
 		if (!data) return cb(null, false);
 
-		let doc = await urlModel.findOne({ url: data.path, "users.username":{$in:[username]} }, ["dest", "users.$"]);
+		let doc = await urlModel.findOne({ url: data.path, "users.username":{$in:[username.toString()]} }, ["dest", "users.$"]);
 
 		// No document
 		if (!doc) return cb(null, false);
@@ -87,6 +89,7 @@ module.exports.login = login;
  * @param {Function} cb The callback function
  */
 const token = new TokenStrategy((token, cb) => {
+	if (!token || typeof(token)!=="string") return cb(null, false);
 	if (token===process.env.API_TOKEN) return cb(null, true);
 	return cb(null, false);
 });
