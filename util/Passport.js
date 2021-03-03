@@ -52,10 +52,10 @@ const login = new LocalStrategy({
 }, async (req, username, password, cb) => {
 	try {
 		// Missing token
-		if (!req.body.token || typeof(req.body.token)!=="string" || typeof(passphrase)!=="string"|| typeof(username)!=="string") return cb(null, false);
-		
+		if (!req.body.token || typeof(req.body.token)!=="string" || typeof(username)!=="string" || typeof(password)!=="string") return cb(null, false);
+
 		let data = RouteHandler.verifyToken(req.body.token);
-		
+
 		let handler = await new RouteHandler(req.params.url);
 
 		// Token is invalid

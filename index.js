@@ -41,6 +41,7 @@ app.use("/.auth", require("./routes/auth"));
 app.use("/.new", require("./routes/new"));
 app.use("/.frame", require("./routes/frame"));
 app.use("/.list", require("./routes/list"));
+app.use("/.delete", require("./routes/delete"));
 app.get("/:url", require("./routes/redirect"));
 
 app.get("/", (req,res) =>{
@@ -53,7 +54,6 @@ app.get("/", (req,res) =>{
 // 			.then(r=>{
 // 				console.log(r);
 // 				if(!r) return res.redirect(config.defaultRedirect);
-		
 // 				return res.redirect(r.dest);
 // 			})
 // 	} catch(err) {

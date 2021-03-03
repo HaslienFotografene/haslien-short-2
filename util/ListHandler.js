@@ -132,4 +132,13 @@ module.exports = class ListHandler {
 			result: d
 		}
 	}
+
+	/**
+	 * Permanently deletes a path
+	 * @param {String} path
+	 * @returns {Promise<Object>}
+	 */
+	deletePath(path) {
+		return this.urlModel.deleteOne({path: path.toLowerCase()}).exec();
+	}
 };

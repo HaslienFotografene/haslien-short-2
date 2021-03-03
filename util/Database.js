@@ -40,14 +40,33 @@ const urlSchema = new mongoose.Schema({
 	created: Date,
 	modified: Date,
 	uses: Number,
+	// For one phrase fits all:
 	passphrase: {
 		maxlength: [100, "Passphrases can only be max 100 characters long"],
 		type: String
 	},
+	// For users:
 	users: [{
 		username: String,
 		password: String,
 		flags: Int32
+	}],
+	// For random access strings:
+	phrases: [{
+		phrase: {
+			type: String,
+			required: true,
+			default: () => Math.random().toString(16).slice(2)
+		},
+		description: {
+			type: String,
+			required: false
+		},
+		created: {
+			type: Date,
+			required: true,
+			default: Date.now
+		}
 	}],
 	flags: Int32
 }, { collection: "shortUrls" });

@@ -19,7 +19,7 @@ class RouteHandler {
 		this.route = route.toLowerCase();
 
 		/**
-		 * The accesslog model
+		 * The access log model
 		 * @property {Model} logModel
 		 */
 		this.logModel = accessLog;
@@ -54,6 +54,7 @@ class RouteHandler {
 				"url",
 				"dest",
 				"passphrase",
+				"phrases",
 				"user",
 				"frame"
 			]
@@ -89,7 +90,7 @@ class RouteHandler {
 		return this;
 	}
 
-	/* *========================================
+	/**========================================
 	 * 		Public getters
 	 **========================================*/
 
@@ -110,7 +111,7 @@ class RouteHandler {
 	}
 
 	/**
-	 * Check if this endpint require passphrase
+	 * Check if this endpoint require passphrase
 	 * @returns {Boolean}
 	 */
 	get passphraseRequired() {

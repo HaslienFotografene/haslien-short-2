@@ -76,11 +76,21 @@ Body: {
 }
 ```
 
+# Logs
+Uses of links are logged and a counter on a short-url increased.
+Logs can be requested using: 
+```http request
+GET /.list/logs?[limit=100]&[offset=0]
+Content-Type: application/json
+Authorization: Bearer {token}
+```
+
 # Roadmap
-* iframe embedder on 'frame' flag
+* iframe embedder on 'frame' flag (*done?*)
 * Make a random URL generation
-* Create nice UI for login/passphrase
-* Verify statistics logging working
+* Create generated unique passphrase for a specific URL
+* ~~Create nice UI for login/passphrase~~
+* ~~Verify statistics logging working~~
 * Add statistics to authorized endpoints:  
 	* successfull logins
 	* invalid logins
