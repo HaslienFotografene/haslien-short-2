@@ -1,5 +1,12 @@
-# Haslien-short-2
-An private URL shortener.
+# Haslien Short v2
+An private URL shortener for Haslien Fotografene.
+
+# Features
+* passphrase protected redirects (*shared password, no username*)
+* username/password protected redirects, with ability to have multiple "logins" per redirect
+* automatically saved login per endpoint to avoid having to re-login
+* basic counter for uses
+* access logs for deeper statistics per endpoint
 
 # Endpoints
 
